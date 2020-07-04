@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
+import "./styles/global.css";
 import axios from "axios";
 
 import Header from "./components/Header";
@@ -11,6 +11,9 @@ import UserSignUp from "./components/UserSignUp";
 import UserSignOut from "./components/UserSignOut";
 import CreateCourse from "./components/CreateCourse";
 import UpdateCourse from "./components/UpdateCourse";
+// import withContext from "./Context";
+
+// const HeaderWithContext = withContext(Header);
 
 class App extends Component {
   constructor() {
@@ -27,29 +30,21 @@ class App extends Component {
       .then((res) => {
         const course = res.data;
         console.log(course);
+        this.setState({ courses: course });
       })
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
       });
-
-    // fetch("http://localhost:5000/api/courses")
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     const course = res.data;
-    //     console.log(course);
-    //     this.setState({ courses: course });
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error fetching and parsing data", error);
-    //   });
   }
 
   render() {
     return (
-      <div>
-        <h1>Hello world!</h1>
-        {/* <Courses courses={this.state.courses} /> */}
-      </div>
+      <Router>
+        <div>
+          <Header />
+          <Courses courses={this.state.courses} />
+        </div>
+      </Router>
     );
   }
 }
