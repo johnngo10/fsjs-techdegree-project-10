@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import axios from "axios";
 
 const CourseDetail = (props) => {
   const course = props.courses;
@@ -6,7 +7,7 @@ const CourseDetail = (props) => {
     <div>
       <div className="actions--bar">
         <div className="bounds">
-          <div class="grid-100">
+          <div className="grid-100">
             <span>
               <a className="button" href="update-course.html">
                 Update Course
@@ -15,7 +16,7 @@ const CourseDetail = (props) => {
                 Delete Course
               </a>
             </span>
-            <a class="button button-secondary" href="index.html">
+            <a className="button button-secondary" href="index.html">
               Return to List
             </a>
           </div>
