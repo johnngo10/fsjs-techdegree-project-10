@@ -20,13 +20,15 @@ export default (props) => {
         {elements()}
         <div class="grid-100 pad-bottom">
           <button class="button" type="submit">
-            Sign Up
+            {submitButtonText}
           </button>
-          <Link to="/">
-            <button type="button" class="button button-secondary">
-              Cancel
-            </button>
-          </Link>
+          <button
+            type="button"
+            class="button button-secondary"
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>
