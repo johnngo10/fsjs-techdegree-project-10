@@ -14,25 +14,23 @@ import UpdateCourse from "./components/UpdateCourse";
 
 // const HeaderWithContext = withContext(Header);
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Courses} />
-            <Route path="/courses/create" component={CreateCourse} />
-            <Route path="/courses/:id/update" component={UpdateCourse} />
-            <Route path="/courses/:id" component={CourseDetail} />
-            <Route path="/signin" component={UserSignIn} />
-            <Route path="/signup" component={UserSignUp} />
-            <Route path="/signout" component={UserSignOut} />
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <div>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Courses} />
+          <Route path="/courses/create" component={CreateCourse} />
+          <Route path="/courses/:id/update" component={UpdateCourse} />
+          <Route path="/courses/:id" component={CourseDetail} />
+          <Route path="/signin" component={UserSignIn} />
+          <Route path="/signup" component={UserSignUp} />
+          <Route path="/signout" component={UserSignOut} />
+        </Switch>
+      </div>
+    </Router>
+  );
+};
 
 export default App;

@@ -17,7 +17,6 @@ class Courses extends Component {
       .get("http://localhost:5000/api/courses")
       .then((res) => {
         const course = res.data;
-        console.log(course);
         this.setState({ courses: course });
       })
       .catch((error) => {
@@ -30,14 +29,13 @@ class Courses extends Component {
     let course = results.map((course) => {
       return (
         <div className="grid-33" key={course.id}>
-          <Link className="course--module course--link" to="/courses/:id">
+          <Link
+            className="course--module course--link"
+            to={`/courses/${course.id}`}
+          >
             <h4 className="course--label">Course</h4>
             <h3 className="course--title">{course.title}</h3>
           </Link>
-          {/* <a className="course--module course--link" href="">
-          <h4 className="course--label">Course</h4>
-          <h3 className="course--title">{course.title}</h3>
-        </a> */}
         </div>
       );
     });
