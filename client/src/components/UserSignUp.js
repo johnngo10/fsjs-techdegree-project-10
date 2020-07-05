@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UserSignUp = () => {
   return (
@@ -61,18 +62,15 @@ const UserSignUp = () => {
               <button class="button" type="submit">
                 Sign Up
               </button>
-              <button
-                class="button button-secondary"
-                onClick="event.preventDefault(); location.href='index.html';"
-              >
-                Cancel
-              </button>
+              <Link to="/">
+                <button class="button button-secondary">Cancel</button>
+              </Link>
             </div>
           </form>
         </div>
         <p>&nbsp;</p>
         <p>
-          Already have a user account? <a href="sign-in.html">Click here</a> to
+          Already have a user account? <Link to="/signin">Click here</Link> to
           sign in!
         </p>
       </div>

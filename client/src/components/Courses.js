@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { render } from "react-dom";
 
 class Courses extends Component {
   constructor() {
@@ -45,9 +44,9 @@ class Courses extends Component {
         {course}
         <div>
           <div className="grid-33">
-            <a
+            <Link
               className="course--module course--add--module"
-              href="create-course.html"
+              to="/courses/create"
             >
               <h3 className="course--add--title">
                 <svg
@@ -62,7 +61,7 @@ class Courses extends Component {
                 </svg>
                 New Course
               </h3>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
