@@ -3,22 +3,14 @@ import { Link } from "react-router-dom";
 
 export default class Header extends React.PureComponent {
   render() {
-    // const { context } = this.props;
-    // const authUser = context.authenticatedUser;
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
     return (
       <div className="header">
         <div className="bounds">
           <h1 className="header--logo">Courses</h1>
           <nav>
-            <React.Fragment>
-              <Link className="signup" to="/signup">
-                Sign Up
-              </Link>
-              <Link className="signin" to="/signin">
-                Sign in
-              </Link>
-            </React.Fragment>
-            {/* {authUser ? (
+            {authUser ? (
               <React.Fragment>
                 <span>Welcome, {authUser.name}!</span>
                 <Link to="/signout">Sign Out</Link>
@@ -32,10 +24,21 @@ export default class Header extends React.PureComponent {
                   Sign in
                 </Link>
               </React.Fragment>
-            )} */}
+            )}
           </nav>
         </div>
       </div>
     );
   }
+}
+
+{
+  /* <React.Fragment>
+              <Link className="signup" to="/signup">
+                Sign Up
+              </Link>
+              <Link className="signin" to="/signin">
+                Sign in
+              </Link>
+            </React.Fragment> */
 }
