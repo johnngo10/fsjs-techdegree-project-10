@@ -18,13 +18,13 @@ export default (props) => {
       <ErrorsDisplay errors={errors} />
       <form onSubmit={handleSubmit}>
         {elements()}
-        <div class="grid-100 pad-bottom">
-          <button class="button" type="submit">
+        <div className="grid-100 pad-bottom">
+          <button className="button" type="submit">
             {submitButtonText}
           </button>
           <button
             type="button"
-            class="button button-secondary"
+            className="button button-secondary"
             onClick={handleCancel}
           >
             Cancel

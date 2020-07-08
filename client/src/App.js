@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./styles/global.css";
 
@@ -18,23 +18,20 @@ const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
 
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <HeaderWithContext />
-        <Switch>
-          <Route exact path="/" component={Courses} />
-          <PrivateRoute path="/courses/create" component={CreateCourse} />
-          <PrivateRoute path="/courses/:id/update" component={UpdateCourse} />
-          <Route path="/courses/:id" component={CourseDetail} />
-          <Route path="/signin" component={UserSignIn} />
-          <Route path="/signup" component={UserSignUp} />
-          <Route path="/signout" component={UserSignOut} />
-        </Switch>
-      </div>
-    </Router>
-  );
-};
+export default () => (
+  <Router>
+    <div>
+      <HeaderWithContext />
 
-export default App;
+      <Switch>
+        <Route exact path="/" component={Courses} />
+        <PrivateRoute path="/courses/create" component={CreateCourse} />
+        <PrivateRoute path="/courses/:id/update" component={UpdateCourse} />
+        <Route path="/courses/:id" component={CourseDetail} />
+        <Route path="/signin" component={UserSignInWithContext} />
+        <Route path="/signup" component={UserSignUpWithContext} />
+        <Route path="/signout" component={UserSignOutWithContext} />
+      </Switch>
+    </div>
+  </Router>
+);

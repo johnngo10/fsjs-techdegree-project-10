@@ -28,7 +28,7 @@ export default class UserSignIn extends Component {
                     id="emailAddress"
                     name="emailAddress"
                     type="text"
-                    class=""
+                    className=""
                     placeholder="Email Address"
                     value={emailAddress}
                     onChange={this.change}
@@ -39,7 +39,7 @@ export default class UserSignIn extends Component {
                     id="password"
                     name="password"
                     type="password"
-                    class=""
+                    className=""
                     placeholder="Password"
                     value={password}
                     onChange={this.change}
@@ -72,7 +72,7 @@ export default class UserSignIn extends Component {
   submit = () => {
     const { context } = this.props;
     const { from } = this.props.location.state || {
-      from: { pathname: "/authenticated" },
+      from: { pathname: "/" },
     };
     const { emailAddress, password } = this.state;
 

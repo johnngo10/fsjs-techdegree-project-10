@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class CreateCourse extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: "",
-    };
-  }
+export default class CreateCourse extends Component {
+  state = {
+    courseTitle: "",
+    description: "",
+    estimatedTime: "",
+    materials: "",
+    errors: [],
+  };
 
   render() {
     return (
@@ -32,7 +33,7 @@ class CreateCourse extends Component {
                     id="title"
                     name="title"
                     type="text"
-                    class="input-title course--title--input"
+                    className="input-title course--title--input"
                     placeholder="Course title..."
                     value=""
                   />
@@ -44,7 +45,7 @@ class CreateCourse extends Component {
                   <textarea
                     id="description"
                     name="description"
-                    class=""
+                    className=""
                     placeholder="Course description..."
                   ></textarea>
                 </div>
@@ -60,7 +61,7 @@ class CreateCourse extends Component {
                         id="estimatedTime"
                         name="estimatedTime"
                         type="text"
-                        class="course--time--input"
+                        className="course--time--input"
                         placeholder="Hours"
                         value=""
                       />
@@ -72,7 +73,7 @@ class CreateCourse extends Component {
                       <textarea
                         id="materialsNeeded"
                         name="materialsNeeded"
-                        class=""
+                        className=""
                         placeholder="List materials..."
                       ></textarea>
                     </div>
@@ -96,5 +97,3 @@ class CreateCourse extends Component {
     );
   }
 }
-
-export default CreateCourse;

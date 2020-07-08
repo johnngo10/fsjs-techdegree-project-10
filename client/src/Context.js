@@ -11,7 +11,7 @@ export class Provider extends Component {
 
   constructor() {
     super();
-    this.date = new Data();
+    this.data = new Data();
   }
 
   render() {

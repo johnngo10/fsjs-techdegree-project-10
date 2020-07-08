@@ -24,9 +24,10 @@ export default class UserSignUp extends Component {
 
     return (
       <div className="bounds">
-        <div class="grid-33 centered signin">
+        <div className="grid-33 centered signin">
           <h1>Sign Up</h1>
           <Form
+            cancel={this.cancel}
             errors={errors}
             submit={this.submit}
             submitButtonText="Sign Up"
@@ -37,7 +38,7 @@ export default class UserSignUp extends Component {
                     id="firstName"
                     name="firstName"
                     type="text"
-                    class=""
+                    className=""
                     placeholder="First Name"
                     value={firstName}
                     onChange={this.change}
@@ -48,7 +49,7 @@ export default class UserSignUp extends Component {
                     id="lastName"
                     name="lastName"
                     type="text"
-                    class=""
+                    className=""
                     placeholder="Last Name"
                     value={lastName}
                     onChange={this.change}
@@ -59,7 +60,7 @@ export default class UserSignUp extends Component {
                     id="emailAddress"
                     name="emailAddress"
                     type="text"
-                    class=""
+                    className=""
                     placeholder="Email Address"
                     value={emailAddress}
                     onChange={this.change}
@@ -70,7 +71,7 @@ export default class UserSignUp extends Component {
                     id="password"
                     name="password"
                     type="password"
-                    class=""
+                    className=""
                     placeholder="Password"
                     value={password}
                     onChange={this.change}
@@ -81,7 +82,7 @@ export default class UserSignUp extends Component {
                     id="confirmPassword"
                     name="confirmPassword"
                     type="password"
-                    class=""
+                    className=""
                     placeholder="Confirm Password"
                     value={confirmPassword}
                     onChange={this.change}
@@ -137,7 +138,7 @@ export default class UserSignUp extends Component {
           this.setState({ errors });
         } else {
           context.actions.signIn(emailAddress, password).then(() => {
-            this.props.history.push("/authenticated");
+            this.props.history.push("/");
           });
         }
       })
