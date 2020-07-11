@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import Form from "./Form";
 
 export default class CreateCourse extends Component {
@@ -8,17 +8,13 @@ export default class CreateCourse extends Component {
     description: "",
     estimatedTime: "",
     materialsNeeded: "",
+    emailAddress: "",
+    password: "",
     errors: [],
   };
 
   render() {
-    const {
-      title,
-      description,
-      estimatedTime,
-      materialsNeeded,
-      errors,
-    } = this.state;
+    const { errors } = this.state;
 
     const { context } = this.props;
     const authUser = context.authenticatedUser;
@@ -43,7 +39,6 @@ export default class CreateCourse extends Component {
                       type="text"
                       className="input-title course--title--input"
                       placeholder="Course title..."
-                      value={title}
                       onChange={this.change}
                     />
                   </div>
@@ -58,7 +53,6 @@ export default class CreateCourse extends Component {
                       name="description"
                       className=""
                       placeholder="Course description..."
-                      value={description}
                       onChange={this.change}
                     ></textarea>
                   </div>
@@ -76,7 +70,6 @@ export default class CreateCourse extends Component {
                           type="text"
                           className="course--time--input"
                           placeholder="Hours"
-                          value={estimatedTime}
                           onChange={this.change}
                         />
                       </div>
@@ -89,7 +82,6 @@ export default class CreateCourse extends Component {
                           name="materialsNeeded"
                           className=""
                           placeholder="List materials..."
-                          value={materialsNeeded}
                           onChange={this.change}
                         ></textarea>
                       </div>
@@ -119,6 +111,11 @@ export default class CreateCourse extends Component {
     const { context } = this.props;
     const { title, description, estimatedTime, materialsNeeded } = this.state;
 
+    const { emailAddress, password } = context.authenticatedUser;
+
+    console.log(emailAddress);
+    console.log(password);
+
     // Create course
     const course = {
       title,
@@ -128,11 +125,12 @@ export default class CreateCourse extends Component {
     };
 
     context.data
-      .createCourse(course)
+      .createCourse(course, emailAddress, password)
       .then((errors) => {
         if (errors.length) {
           this.setState({ errors });
         } else {
+          console.log("Course created");
           this.props.history.push("/");
         }
       })
