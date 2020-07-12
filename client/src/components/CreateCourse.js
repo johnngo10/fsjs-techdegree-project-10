@@ -8,13 +8,18 @@ export default class CreateCourse extends Component {
     description: "",
     estimatedTime: "",
     materialsNeeded: "",
-    emailAddress: "",
-    password: "",
+    userId: "",
     errors: [],
   };
 
   render() {
-    const { errors } = this.state;
+    const {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      errors,
+    } = this.state;
 
     const { context } = this.props;
     const authUser = context.authenticatedUser;
@@ -40,6 +45,7 @@ export default class CreateCourse extends Component {
                       className="input-title course--title--input"
                       placeholder="Course title..."
                       onChange={this.change}
+                      value={title}
                     />
                   </div>
                   <p>
@@ -54,6 +60,7 @@ export default class CreateCourse extends Component {
                       className=""
                       placeholder="Course description..."
                       onChange={this.change}
+                      value={description}
                     ></textarea>
                   </div>
                 </div>
@@ -71,6 +78,7 @@ export default class CreateCourse extends Component {
                           className="course--time--input"
                           placeholder="Hours"
                           onChange={this.change}
+                          value={estimatedTime}
                         />
                       </div>
                     </li>
@@ -83,6 +91,7 @@ export default class CreateCourse extends Component {
                           className=""
                           placeholder="List materials..."
                           onChange={this.change}
+                          value={materialsNeeded}
                         ></textarea>
                       </div>
                     </li>
@@ -109,12 +118,12 @@ export default class CreateCourse extends Component {
 
   submit = () => {
     const { context } = this.props;
+
     const { title, description, estimatedTime, materialsNeeded } = this.state;
 
-    const { emailAddress, password } = context.authenticatedUser;
+    const userId = context.authenticatedUser.id;
 
-    console.log(emailAddress);
-    console.log(password);
+    const { emailAddress, password } = context.authenticatedUser;
 
     // Create course
     const course = {
@@ -122,7 +131,10 @@ export default class CreateCourse extends Component {
       description,
       estimatedTime,
       materialsNeeded,
+      userId,
     };
+
+    console.log(context.authenticatedUser.id);
 
     context.data
       .createCourse(course, emailAddress, password)
