@@ -9,13 +9,14 @@ export default class UpdateCourse extends Component {
     materialsNeeded: "",
     firstName: "",
     lastName: "",
+    courseId: this.props.match.params.id,
     errors: [],
   };
 
   componentDidMount() {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
-    const courseId = this.props.match.params.id;
+    const { courseId } = this.state;
 
     context.data.getCourseDetail(courseId).then((response) => {
       if (response) {
@@ -68,6 +69,7 @@ export default class UpdateCourse extends Component {
                       className="input-title course--title--input"
                       placeholder="Course title..."
                       value={title}
+                      onChange={this.change}
                     />
                   </div>
                   <p>
@@ -82,6 +84,7 @@ export default class UpdateCourse extends Component {
                       className=""
                       placeholder="Course description..."
                       value={description}
+                      onChange={this.change}
                     ></textarea>
                   </div>
                 </div>
@@ -99,6 +102,7 @@ export default class UpdateCourse extends Component {
                           className="course--time--input"
                           placeholder="Hours"
                           value={estimatedTime}
+                          onChange={this.change}
                         />
                       </div>
                     </li>
@@ -111,6 +115,7 @@ export default class UpdateCourse extends Component {
                           className=""
                           placeholder="List materials..."
                           value={materialsNeeded}
+                          onChange={this.change}
                         ></textarea>
                       </div>
                     </li>
@@ -123,4 +128,63 @@ export default class UpdateCourse extends Component {
       </div>
     );
   }
+
+  change = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    this.setState(() => {
+      return {
+        [name]: value,
+      };
+    });
+  };
+
+  submit = () => {
+    const { context } = this.props;
+
+    const {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      courseId,
+    } = this.state;
+
+    // Get userID
+    const userId = context.authenticatedUser.id;
+    console.log(userId);
+    console.log(courseId);
+
+    // Get user credentials
+    const { emailAddress, password } = context.authenticatedUser;
+
+    // Create course
+    const course = {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      userId,
+    };
+
+    context.data
+      .updateCourse(courseId, course, emailAddress, password)
+      .then((errors) => {
+        if (errors.length) {
+          this.setState({ errors });
+        } else {
+          console.log("Course updated");
+          this.props.history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.props.history.push("/error");
+      });
+  };
+
+  cancel = () => {
+    this.props.history.push("/");
+  };
 }

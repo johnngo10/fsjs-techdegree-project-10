@@ -124,6 +124,7 @@ export default class CreateCourse extends Component {
     // Get userID
     const userId = context.authenticatedUser.id;
 
+    // Get user credentials
     const { emailAddress, password } = context.authenticatedUser;
 
     // Create course
