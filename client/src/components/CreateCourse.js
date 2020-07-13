@@ -121,6 +121,7 @@ export default class CreateCourse extends Component {
 
     const { title, description, estimatedTime, materialsNeeded } = this.state;
 
+    // Get userID
     const userId = context.authenticatedUser.id;
 
     const { emailAddress, password } = context.authenticatedUser;
@@ -133,8 +134,6 @@ export default class CreateCourse extends Component {
       materialsNeeded,
       userId,
     };
-
-    console.log(context.authenticatedUser.id);
 
     context.data
       .createCourse(course, emailAddress, password)
