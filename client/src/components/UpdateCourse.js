@@ -153,8 +153,6 @@ export default class UpdateCourse extends Component {
 
     // Get userID
     const userId = context.authenticatedUser.id;
-    console.log(userId);
-    console.log(courseId);
 
     // Get user credentials
     const { emailAddress, password } = context.authenticatedUser;

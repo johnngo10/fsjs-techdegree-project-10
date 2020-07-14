@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-class CourseDetail extends Component {
+export default class CourseDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,6 +11,7 @@ class CourseDetail extends Component {
       course: [],
       firstName: "",
       lastName: "",
+      errors: [],
     };
   }
 
@@ -31,7 +32,7 @@ class CourseDetail extends Component {
   }
 
   render() {
-    const course = this.state.course;
+    const { course, courseId, lastName, firstName } = this.state;
 
     return (
       <div>
@@ -39,13 +40,10 @@ class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <Link
-                  className="button"
-                  to={`/courses/${this.state.courseId}/update`}
-                >
+                <Link className="button" to={`/courses/${courseId}/update`}>
                   Update Course
                 </Link>
-                <Link className="button" to="#">
+                <Link className="button" to="/" onClick={this.delete}>
                   Delete Course
                 </Link>
               </span>
@@ -61,7 +59,7 @@ class CourseDetail extends Component {
               <h4 className="course--label">Course</h4>
               <h3 className="course--title">{course.title}</h3>
               <p>
-                By {this.state.firstName} {this.state.lastName}
+                By {firstName} {lastName}
               </p>
             </div>
             <div className="course--description">
@@ -88,6 +86,30 @@ class CourseDetail extends Component {
       </div>
     );
   }
-}
 
-export default CourseDetail;
+  delete = () => {
+    const { context } = this.props;
+
+    const { courseId } = this.state;
+
+    // Get user credentials
+    const { emailAddress, password } = context.authenticatedUser;
+
+    context.data
+      .deleteCourse(courseId, emailAddress, password)
+      .then((errors) => {
+        if (errors.length) {
+          this.setState({ errors });
+        } else {
+          console.log("Course deleted");
+          this.props.history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.props.history.push("/error");
+      });
+
+    window.location.reload();
+  };
+}
