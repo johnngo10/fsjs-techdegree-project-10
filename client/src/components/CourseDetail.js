@@ -43,7 +43,7 @@ export default class CourseDetail extends Component {
                 <Link className="button" to={`/courses/${courseId}/update`}>
                   Update Course
                 </Link>
-                <Link className="button" to="/" onClick={this.delete}>
+                <Link className="button" onClick={this.delete}>
                   Delete Course
                 </Link>
               </span>
@@ -109,7 +109,5 @@ export default class CourseDetail extends Component {
         console.log(err);
         this.props.history.push("/error");
       });
-
-    window.location.reload();
   };
 }
