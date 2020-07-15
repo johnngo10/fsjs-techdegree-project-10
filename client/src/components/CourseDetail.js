@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 export default class CourseDetail extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class CourseDetail extends Component {
       course: [],
       firstName: "",
       lastName: "",
+      courseOwnerId: "",
       errors: [],
     };
   }
@@ -24,6 +26,7 @@ export default class CourseDetail extends Component {
           course: result,
           firstName: result.user.firstName,
           lastName: result.user.lastName,
+          courseOwnerId: result.userId,
         });
       })
       .catch((error) => {
@@ -32,7 +35,9 @@ export default class CourseDetail extends Component {
   }
 
   render() {
-    const { course, courseId, lastName, firstName } = this.state;
+    const { course, courseId, lastName, firstName, courseOwnerId } = this.state;
+    const { context } = this.props;
+    const authUser = context.authenticatedUser;
 
     return (
       <div>
@@ -40,12 +45,18 @@ export default class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
-                <Link className="button" to={`/courses/${courseId}/update`}>
-                  Update Course
-                </Link>
-                <Link className="button" onClick={this.delete}>
-                  Delete Course
-                </Link>
+                {authUser !== null && authUser.id === courseOwnerId ? (
+                  <React.Fragment>
+                    <Link className="button" to={`/courses/${courseId}/update`}>
+                      Update Course
+                    </Link>
+                    <Link className="button" onClick={this.delete} to="#">
+                      Delete Course
+                    </Link>
+                  </React.Fragment>
+                ) : (
+                  ""
+                )}
               </span>
               <Link className="button button-secondary" to="/">
                 Return to List
@@ -63,7 +74,7 @@ export default class CourseDetail extends Component {
               </p>
             </div>
             <div className="course--description">
-              <p>{course.description}</p>
+              <ReactMarkdown>{course.description}</ReactMarkdown>
             </div>
           </div>
           <div className="grid-25 grid-right">
@@ -76,7 +87,7 @@ export default class CourseDetail extends Component {
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
                   <ul>
-                    <li>{course.materialsNeeded}</li>
+                    <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
                   </ul>
                 </li>
               </ul>
