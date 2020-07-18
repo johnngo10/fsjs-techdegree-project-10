@@ -76,8 +76,6 @@ export default class UserSignIn extends Component {
     };
     const { emailAddress, password } = this.state;
 
-    console.log(password);
-
     context.actions
       .signIn(emailAddress, password)
       .then((user) => {

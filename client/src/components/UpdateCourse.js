@@ -10,6 +10,7 @@ export default class UpdateCourse extends Component {
     firstName: "",
     lastName: "",
     courseId: this.props.match.params.id,
+    courseOwnerId: "",
     errors: [],
   };
 
@@ -18,20 +19,32 @@ export default class UpdateCourse extends Component {
     const authUser = context.authenticatedUser;
     const { courseId } = this.state;
 
-    context.data.getCourseDetail(courseId).then((response) => {
-      if (response) {
-        this.setState({
-          title: response.title,
-          description: response.description,
-          estimatedTime: response.estimatedTime,
-          materialsNeeded: response.materialsNeeded,
-          firstName: authUser.firstName,
-          lastName: authUser.lastName,
-        });
-      } else {
-        console.log("error");
-      }
-    });
+    context.data
+      .getCourseDetail(courseId)
+      .then((response) => {
+        if (response) {
+          this.setState({
+            title: response.title,
+            description: response.description,
+            estimatedTime: response.estimatedTime,
+            materialsNeeded: response.materialsNeeded,
+            firstName: authUser.firstName,
+            lastName: authUser.lastName,
+            courseOwnerId: response.userId,
+          });
+        } else {
+          console.log("error");
+          this.props.history.push("/notfound");
+        }
+
+        if (authUser.id !== this.state.courseOwnerId) {
+          this.props.history.push("/forbidden");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.props.history.push("/error");
+      });
   }
 
   render() {
