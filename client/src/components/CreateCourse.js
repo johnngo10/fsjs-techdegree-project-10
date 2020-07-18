@@ -127,7 +127,7 @@ export default class CreateCourse extends Component {
     // Get user credentials
     const { emailAddress, password } = context.authenticatedUser;
 
-    // Create course
+    // Course variables
     const course = {
       title,
       description,

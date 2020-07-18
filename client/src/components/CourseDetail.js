@@ -46,6 +46,7 @@ export default class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
+                {/* Ternary operator checks to see if user matches and displays buttons if true  */}
                 {authUser !== null && authUser.id === courseOwnerId ? (
                   <React.Fragment>
                     <Link className="button" to={`/courses/${courseId}/update`}>
