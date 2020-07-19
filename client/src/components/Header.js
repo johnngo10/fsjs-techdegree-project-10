@@ -12,7 +12,9 @@ export default class Header extends React.PureComponent {
           <nav>
             {authUser ? (
               <React.Fragment>
-                <span>Welcome, {authUser.firstName}!</span>
+                <span>
+                  Welcome, {authUser.firstName} {authUser.lastName}!
+                </span>
                 <Link to="/signout">Sign Out</Link>
               </React.Fragment>
             ) : (
@@ -30,15 +32,4 @@ export default class Header extends React.PureComponent {
       </div>
     );
   }
-}
-
-{
-  /* <React.Fragment>
-              <Link className="signup" to="/signup">
-                Sign Up
-              </Link>
-              <Link className="signin" to="/signin">
-                Sign in
-              </Link>
-            </React.Fragment> */
 }

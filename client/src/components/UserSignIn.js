@@ -58,6 +58,10 @@ export default class UserSignIn extends Component {
     );
   }
 
+  /**
+   * A function that takes the user's input values and assigns it to the appropriate state property
+   * @param {string} event
+   */
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -69,6 +73,9 @@ export default class UserSignIn extends Component {
     });
   };
 
+  /**
+   * A function that authenticates the user and signes the user in
+   */
   submit = () => {
     const { context } = this.props;
     const { from } = this.props.location.state || {
@@ -93,6 +100,9 @@ export default class UserSignIn extends Component {
       });
   };
 
+  /**
+   * A function that redirects the user back to the home page
+   */
   cancel = () => {
     this.props.history.push("/");
   };

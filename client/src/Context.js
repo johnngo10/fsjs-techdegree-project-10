@@ -31,6 +31,11 @@ export class Provider extends Component {
     );
   }
 
+  /**
+   * A method that checks if the user exist and signs in the user by adding the user info to state
+   * @param {string} emailAddress - User's email address
+   * @param {string} password - User's password
+   */
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
     if (user !== null) {
@@ -45,6 +50,11 @@ export class Provider extends Component {
     return user;
   };
 
+  /**
+   * A method that signs out the user by removing them from state
+   * @param {string} emailAddress - User's email address
+   * @param {string} password - User's password
+   */
   signOut = async (emailAddress, password) => {
     this.setState(() => {
       return { authenticatedUser: null };

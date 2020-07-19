@@ -153,6 +153,9 @@ export default class UpdateCourse extends Component {
     });
   };
 
+  /**
+   * A function that submits the form by authenticating the user and updates the course by sending data to the updateCourse method
+   */
   submit = () => {
     const { context } = this.props;
 
@@ -195,7 +198,12 @@ export default class UpdateCourse extends Component {
       });
   };
 
+  /**
+   * A function that redirects the user back to the course detail page that was being viewed
+   */
   cancel = () => {
-    this.props.history.push("/");
+    const { courseId } = this.state;
+
+    this.props.history.push(`/courses/${courseId}`);
   };
 }

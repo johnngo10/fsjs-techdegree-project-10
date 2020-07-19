@@ -105,6 +105,10 @@ export default class CreateCourse extends Component {
     );
   }
 
+  /**
+   * A function that takes the user's input values and assigns it to the appropriate state property
+   * @param {string} event - The user's input values
+   */
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -116,6 +120,9 @@ export default class CreateCourse extends Component {
     });
   };
 
+  /**
+   * A function that authenticates the user and creates the course
+   */
   submit = () => {
     const { context } = this.props;
 
@@ -152,6 +159,9 @@ export default class CreateCourse extends Component {
       });
   };
 
+  /**
+   * A function that redirects the user back to the home page
+   */
   cancel = () => {
     this.props.history.push("/");
   };

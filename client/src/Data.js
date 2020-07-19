@@ -30,6 +30,11 @@ export default class Data {
     return fetch(url, options);
   }
 
+  /**
+   * A method that retrieves the user by performing a GET request to the api
+   * @param {string} emailAddress - The user's email address
+   * @param {string} password - The user's password
+   */
   async getUser(emailAddress, password) {
     const response = await this.api(`/users`, "GET", null, true, {
       emailAddress,
@@ -44,6 +49,10 @@ export default class Data {
     }
   }
 
+  /**
+   * A method that creates a new user by sending a POST request to the api
+   * @param {object} user - Object containing user info
+   */
   async createUser(user) {
     const response = await this.api("/users", "POST", user);
     if (response.status === 201) {
@@ -57,6 +66,12 @@ export default class Data {
     }
   }
 
+  /**
+   * A method that creates a new course by sending a POST request to the api
+   * @param {object} course - Object containing course info
+   * @param {string} emailAddress - The user's email address
+   * @param {string} password - The user's password
+   */
   async createCourse(course, emailAddress, password) {
     const response = await this.api("/courses", "POST", course, true, {
       emailAddress,
@@ -73,6 +88,10 @@ export default class Data {
     }
   }
 
+  /**
+   * A method that retrieves a course by sending a GET request to the api
+   * @param {number} id - The course's id number
+   */
   async getCourseDetail(id) {
     const response = await this.api(`/courses/${id}`, "GET", null, false, null);
     if (response.status === 200) {
@@ -85,6 +104,13 @@ export default class Data {
     }
   }
 
+  /**
+   * A method that update's a course by sending a PUT request to the api
+   * @param {number} id - The course's id number
+   * @param {object} course - Object containg course info
+   * @param {string} emailAddress - User's email address
+   * @param {string} password - User's password
+   */
   async updateCourse(id, course, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, "PUT", course, true, {
       emailAddress,
@@ -101,6 +127,12 @@ export default class Data {
     }
   }
 
+  /**
+   * A method that deletes a course by sending a DELETE request to the api
+   * @param {number} id - Course's id number
+   * @param {string} emailAddress - User's email address
+   * @param {string} password - User's password
+   */
   async deleteCourse(id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, "DELETE", null, true, {
       emailAddress,

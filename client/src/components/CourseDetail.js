@@ -21,17 +21,21 @@ export default class CourseDetail extends Component {
     axios
       .get(`http://localhost:5000/api/courses/${this.state.courseId}`)
       .then((res) => {
-        const result = res.data;
-        this.setState({
-          course: result,
-          firstName: result.user.firstName,
-          lastName: result.user.lastName,
-          courseOwnerId: result.userId,
-        });
+        if (res) {
+          const result = res.data;
+          this.setState({
+            course: result,
+            firstName: result.user.firstName,
+            lastName: result.user.lastName,
+            courseOwnerId: result.userId,
+          });
+        } else {
+          this.props.history.push("/notfound");
+        }
       })
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
-        this.props.history.push("/notfound");
+        this.props.history.push("/error");
       });
   }
 
@@ -100,6 +104,9 @@ export default class CourseDetail extends Component {
     );
   }
 
+  /**
+   * A function that authenticates the user and deletes the course by sending data to the deleteCourse method
+   */
   delete = () => {
     const { context } = this.props;
 

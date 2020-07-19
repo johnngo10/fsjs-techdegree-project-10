@@ -101,6 +101,10 @@ export default class UserSignUp extends Component {
     );
   }
 
+  /**
+   * A function that takes the user's input values and assigns it to the appropriate state property
+   * @param {string} event
+   */
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -112,6 +116,9 @@ export default class UserSignUp extends Component {
     });
   };
 
+  /**
+   * A function that creates the user by sending data to the createUser method
+   */
   submit = () => {
     const { context } = this.props;
 
@@ -152,6 +159,9 @@ export default class UserSignUp extends Component {
     }
   };
 
+  /**
+   * A function that redirects the user back to the home page
+   */
   cancel = () => {
     this.props.history.push("/");
   };
